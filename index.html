@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generator Undangan Rapat</title>
+    <link rel="icon" href="icon/favicon.png" type="image/png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style id="dynamic-print-style"></style>
     <style>
@@ -151,6 +152,16 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                     </div>
                 </div>
 
+                <div class="mb-3 border-b border-blue-200 pb-3">
+                    <label class="block font-semibold text-blue-700 text-xs mb-1">Tambah Unit Bisnis</label>
+                    <div class="flex gap-2 mb-2">
+                        <select id="in-unit-bisnis" class="flex-grow border rounded p-1.5 focus:ring focus:ring-blue-200 text-xs">
+                            </select>
+                        <button onclick="tambahUnitBisnis()" class="bg-green-600 hover:bg-green-700 text-white px-3 rounded font-bold text-lg transition">+</button>
+                        <button onclick="tambahSemuaUnitBisnis()" class="bg-blue-600 hover:bg-blue-700 text-white px-2 rounded text-xs font-bold transition">Tambah Semua</button>
+                    </div>
+                </div>
+
                 <div class="mb-3">
                     <label class="block font-semibold text-blue-700 text-xs mb-1">Tambah Mahasiswa</label>
                     <div class="flex gap-2 mb-2">
@@ -212,16 +223,15 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             🖨️ Cetak / Simpan PDF
         </button>
         
-        <!-- Watermark -->
         <div class="mt-6 text-center text-xs text-gray-400 font-medium">
-            Made with love from Daffa ❤️
+            Made with love from Daffa ❤️<br>
+            <a href="https://www.flaticon.com/free-icons/fuck" title="fuck icons" class="text-[10px] text-gray-300 hover:text-gray-500 transition mt-2 inline-block">Fuck icons created by andinur - Flaticon</a>
         </div>
     </div>
 
     <div class="w-full md:w-2/3 bg-gray-300 p-4 md:p-8 overflow-y-auto flex flex-col items-center">
         <div id="print-wrapper" class="w-full flex flex-col items-center">
             
-            <!-- Halaman 1: Surat Utama -->
             <div class="page-container relative w-full">
                 <table class="w-full border-0 border-collapse">
                     <thead class="table-header-group">
@@ -305,7 +315,6 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 </table>
             </div>
 
-            <!-- Halaman 2: Lampiran Nama -->
             <div id="page-lampiran" class="page-container relative w-full">
                 <table class="w-full border-0 border-collapse">
                     <thead class="table-header-group">
@@ -345,7 +354,6 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 </table>
             </div>
 
-            <!-- Halaman 3: Daftar Hadir -->
             <div id="page-daftar-hadir" class="page-container relative w-full">
                 <table class="w-full border-0 border-collapse">
                     <thead class="table-header-group">
@@ -390,7 +398,6 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 </table>
             </div>
 
-            <!-- Halaman 4: Berita Acara -->
             <div id="page-berita-acara" class="page-container relative w-full">
                 <table class="w-full border-0 border-collapse">
                     <thead class="table-header-group">
@@ -672,6 +679,7 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
         { prodi: "Manajer Riset Pelayanan", nama: "Fikriya Novita Sari, M.Si" },
         { prodi: "SCCR", nama: "dr. Jutadi, MBBS" }
     ];
+
     function initPejabatDropdown() {
         const select = document.getElementById("in-penandatangan");
         select.innerHTML = '';
@@ -692,6 +700,18 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             option.value = tendik.nama;
             option.text = tendik.nama;
             selectTendik.appendChild(option);
+        });
+    }
+
+    function initUnitBisnis() {
+        const selectUB = document.getElementById("in-unit-bisnis");
+        if (!selectUB) return;
+        selectUB.innerHTML = '';
+        databaseUnitBisnis.forEach(ub => {
+            let option = document.createElement("option");
+            option.value = ub.nama;
+            option.text = `${ub.nama} (${ub.prodi})`;
+            selectUB.appendChild(option);
         });
     }
 
@@ -880,6 +900,27 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
         updatePreview();
     }
 
+    function tambahUnitBisnis() {
+        const nama = document.getElementById("in-unit-bisnis").value;
+        if (!nama) return;
+        const ub = databaseUnitBisnis.find(d => d.nama === nama);
+        if (ub && !daftarUndangan.some(d => d.nama === nama)) {
+            daftarUndangan.push(ub);
+            renderDaftar();
+            updatePreview();
+        }
+    }
+
+    function tambahSemuaUnitBisnis() {
+        databaseUnitBisnis.forEach(d => {
+            if (!daftarUndangan.some(terpilih => terpilih.nama === d.nama)) {
+                daftarUndangan.push(d);
+            }
+        });
+        renderDaftar();
+        updatePreview();
+    }
+
     function tambahMahasiswa() {
         const selectMhs = document.getElementById("in-mahasiswa");
         const nama = selectMhs.value;
@@ -941,8 +982,9 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
         
         container.innerHTML = "";
         daftarUndangan.forEach((d, index) => {
-            const isTendik = !d.prodi.includes("Dosen") && !d.prodi.includes("Rektor") && !d.prodi.includes("Mahasiswa");
+            const isUB = databaseUnitBisnis.some(ub => ub.nama === d.nama);
             const isMhs = d.prodi.includes("Mahasiswa");
+            const isTendik = !d.prodi.includes("Dosen") && !d.prodi.includes("Rektor") && !isMhs && !isUB;
             
             let prodiLabel = "";
             let bgColor = "";
@@ -950,6 +992,9 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             if (isTendik) {
                 prodiLabel = "Tendik";
                 bgColor = "bg-orange-100 border-orange-300 text-orange-800";
+            } else if (isUB) {
+                prodiLabel = d.prodi;
+                bgColor = "bg-purple-100 border-purple-300 text-purple-800";
             } else if (isMhs) {
                 prodiLabel = d.prodi.replace('Mahasiswa S1 ', 'Mhs ');
                 prodiLabel = prodiLabel.replace('Mahasiswa D3 ', 'Mhs D3 ');
@@ -1103,6 +1148,7 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
     window.onload = function() {
         initPejabatDropdown();
         initTendik();
+        initUnitBisnis();
 
         const today = new Date();
         const tomorrow = new Date(today);
