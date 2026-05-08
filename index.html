@@ -330,7 +330,7 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                                         <tr class="bg-gray-100">
                                             <th class="border border-black p-2 w-12 text-center">No</th>
                                             <th class="border border-black p-2 text-left">Nama</th>
-                                            <th class="border border-black p-2 text-left">Program Studi</th>
+                                            <th class="border border-black p-2 text-left">Jabatan/Program Studi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="out-lamp-table-body">
@@ -664,6 +664,14 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
         { prodi: "Mahasiswa S1 Ilmu Komunikasi", nama: "Ahmad Nurul Hikam" }
     ];
 
+    //Database Unit Bisnis
+    const databaseUnitBisnis = [
+        { prodi: "Manajer Resort", nama: "Avio Patria Wijaya, M.Par" },
+        { prodi: "Manajer Farming", nama: "Wahyu Dirgantara, S.Kom" },
+        { prodi: "Manajer Resto", nama: "Muhamad Farhan Yodi Firmansyah, S.Pd" },
+        { prodi: "Manajer Riset Pelayanan", nama: "Fikriya Novita Sari, M.Si" },
+        { prodi: "SCCR", nama: "dr. Jutadi, MBBS" }
+    ];
     function initPejabatDropdown() {
         const select = document.getElementById("in-penandatangan");
         select.innerHTML = '';
