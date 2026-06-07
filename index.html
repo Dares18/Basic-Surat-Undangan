@@ -188,6 +188,20 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 </div>
 
                 <div class="mb-3 border-b border-blue-200 pb-3">
+                    <label class="block font-semibold text-blue-700 text-xs mb-1">Tambah Kaprodi</label>
+                    <div class="flex gap-2 mb-2">
+                        <select id="in-kaprodi"
+                            class="flex-grow border rounded p-1.5 focus:ring focus:ring-blue-200 text-xs">
+                        </select>
+                        <button onclick="tambahKaprodi()"
+                            class="bg-green-600 hover:bg-green-700 text-white px-3 rounded font-bold text-lg transition">+</button>
+                        <button onclick="tambahSemuaKaprodi()"
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-2 rounded text-xs font-bold transition">Tambah
+                            Semua</button>
+                    </div>
+                </div>
+
+                <div class="mb-3 border-b border-blue-200 pb-3">
                     <label class="block font-semibold text-blue-700 text-xs mb-1">Tambah Tendik</label>
                     <div class="flex gap-2 mb-2">
                         <select id="in-tendik"
@@ -282,7 +296,8 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
         <div class="mt-6 mb-2 bg-green-50 border border-green-200 p-3 rounded">
             <p class="text-xs text-green-700 font-bold mb-1">✅ TIPS CETAK PDF RAPI:</p>
             <p class="text-xs text-green-600">Sistem ini sudah punya Auto-Margin. Di settingan Print, pastikan opsi
-                <b>Margins</b> disetel ke <b>None</b>. Jangan gunakan setelan margin bawaan Browser.</p>
+                <b>Margins</b> disetel ke <b>None</b>. Jangan gunakan setelan margin bawaan Browser.
+            </p>
         </div>
         <button onclick="window.print()"
             class="w-full bg-gray-800 hover:bg-black text-white font-bold py-3 px-4 rounded transition duration-200 shadow-lg">
@@ -569,7 +584,6 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             // Dosen S1 Biomedis
             { prodi: "Dosen S1 Biomedis", nama: "Mohammad Ariq Nazar, S.Si, M.Biomed" },
             { prodi: "Dosen S1 Biomedis", nama: "Dian Respati Ayu, S.Si., M.Biomed" },
-            { prodi: "Dosen S1 Biomedis", nama: "Nadya Audina NS. S.Si., M.Biomed" },
             { prodi: "Dosen S1 Biomedis", nama: "Risky Chandra Satria Irawan S.Si, M.Biomed" },
             { prodi: "Dosen S1 Biomedis", nama: "Naufal Sebastian Anggoro, S.Si.,M.Si" },
             { prodi: "Dosen S1 Biomedis", nama: "Dendi Krisna Nugraha, S.Si., M.Sc., PhD." },
@@ -578,19 +592,16 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             { prodi: "Dosen S1 Bioteknologi", nama: "Iffan Alif, S.Si, M.Biotech" },
             { prodi: "Dosen S1 Bioteknologi", nama: "Nurul Hidayah S.Si, M.Biotech" },
             { prodi: "Dosen S1 Bioteknologi", nama: "Salindri Prawitasari, S.Si, M.Si." },
-            { prodi: "Dosen S1 Bioteknologi", nama: "Fauziah Novita Putri Rifai, S.Si, M.Biotech" },
             { prodi: "Dosen S1 Bioteknologi", nama: "Waheni Rizky Aprilia, Ph.D." },
             { prodi: "Dosen S1 Bioteknologi", nama: "Ahmed Faheem Khan, Ph.D." },
             // Dosen S1 Kebidanan
             { prodi: "Dosen S1 Kebidanan", nama: "Bd. Mariza Mustika D, S.Tr.Keb., M.Tr.Keb" },
-            { prodi: "Dosen S1 Kebidanan", nama: "Rizqitha, S.Tr.Keb., M.Tr.Keb" },
             { prodi: "Dosen S1 Kebidanan", nama: "Rizqi Dian Pratiwi, S.Tr.Keb., M.Tr.Keb" },
             { prodi: "Dosen S1 Kebidanan", nama: "Dini Cahyani, S.Si, M.Biotech" },
             // Dosen D3 Kebidanan
             { prodi: "Dosen D3 Kebidanan", nama: "Dewi Elliana, SKM, S.Tr.Keb, M.Kes" },
             { prodi: "Dosen D3 Kebidanan", nama: "Diah Widyatun, S.S.T., M.Tr.Keb" },
             { prodi: "Dosen D3 Kebidanan", nama: "Sheyla Najwatul Maula, .S.T., M.Tr.Keb" },
-            { prodi: "Dosen D3 Kebidanan", nama: "Bdn. Titik Kurniawati, S.SiT, M.Kes, M.Keb" },
             { prodi: "Dosen D3 Kebidanan", nama: "dr. Rita Agustina, M.Biomed" },
             { prodi: "Dosen D3 Kebidanan", nama: "Erna Setyaningsih, S.S.T., M.Tr.Keb" },
             // Dosen Profesi Bidan
@@ -601,11 +612,9 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             { prodi: "Dosen S1 Hukum", nama: "Naufal Sebastian, S.H.,M.H." },
             { prodi: "Dosen S1 Hukum", nama: "Pandam Bayu Seto Aji, SH., MH." },
             { prodi: "Dosen S1 Hukum", nama: "Eko Setyo Ari Wibowo, S.H.I., M.H" },
-            { prodi: "Dosen S1 Hukum", nama: "Dr. Erwin, S.H., M.Kn., M.H." },
             { prodi: "Dosen S1 Hukum", nama: "Zain Arfin Utama, S.H., M.H." },
             // Dosen S1 Manajemen
             { prodi: "Dosen S1 Manajemen", nama: "Yetty Yuliany K, S.E., M.M" },
-            { prodi: "Dosen S1 Manajemen", nama: "Reni Nur Arifah, S.E., M.M." },
             { prodi: "Dosen S1 Manajemen", nama: "Randika Shafly Fawwas, S.M., M.M." },
             { prodi: "Dosen S1 Manajemen", nama: "Putri Aryo Jelang Fitri Khothimah, S.E., M.M." },
             { prodi: "Dosen S1 Manajemen", nama: "Anindya Putri Utami, S.M., M.M." },
@@ -614,7 +623,6 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             // Dosen S1 Ilmu Komunikasi
             { prodi: "Dosen S1 Ilmu Komunikasi", nama: "Sutinnarto, S.I.Kom., M.I.Kom" },
             { prodi: "Dosen S1 Ilmu Komunikasi", nama: "Rif'atul Himmah, S.Sos., M.I.Kom" },
-            { prodi: "Dosen S1 Ilmu Komunikasi", nama: "Muhamad Agung Setiawan, S.Sos., M.Sos" },
             { prodi: "Dosen S1 Ilmu Komunikasi", nama: "Najmi Rizki Khairani, S.Sos., M.I.Kom" },
             { prodi: "Dosen S1 Ilmu Komunikasi", nama: "Lakna Tulas'un, S.Sos, M.I.Kom" },
             { prodi: "Dosen S1 Ilmu Komunikasi", nama: "Bondan Eko Suratmo, S.S. M.A." },
@@ -625,6 +633,19 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             { prodi: "Wakil Rektor III", nama: "Prof Dr. Diana Nur Afifah, S.T.P., M.Si." },
             { prodi: "Wakil Rektor IV", nama: "Prof Yayuk Astuti, S.Si., Ph.D." }
         ];
+
+        // Database Kaprodi
+        const databaseKaprodi = [
+            // Kaprodi S1 Biomedis
+            { prodi: "Kaprodi S1 Biomedis", nama: "Nadya Audina NS. S.Si., M.Biomed" },
+            { prodi: "Kaprodi S1 Bioteknologi", nama: "Fauziah Novita Putri Rifai, S.Si, M.Biotech" },
+            { prodi: "Kaprodi S1 Kebidanan", nama: "Rizqitha, S.Tr.Keb., M.Tr.Keb" },
+            { prodi: "Kaprodi D3 Kebidanan", nama: "Bdn. Titik Kurniawati, S.SiT, M.Kes, M.Keb" },
+            { prodi: "Kaprodi S1 Hukum", nama: "Dr. Erwin, S.H., M.Kn., M.H." },
+            { prodi: "Kaprodi S1 Manajemen", nama: "Reni Nur Arifah, S.E., M.M." },
+            { prodi: "Kaprodi S1 Ilmu Komunikasi", nama: "Muhamad Agung Setiawan, S.Sos., M.Sos" }
+        ];
+
 
         // Database Tendik
         const databaseTendik = [
@@ -781,7 +802,7 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             { prodi: "Manajer Resort", nama: "Avio Patria Wijaya, M.Par" },
             { prodi: "Manajer Farming", nama: "Wahyu Dirgantara, S.Kom" },
             { prodi: "Manajer Resto", nama: "Muhamad Farhan Yodi Firmansyah, S.Pd" },
-            { prodi: "Manajer Riset Pelayanan", nama: "Fikriya Novita Sari, M.Si" },
+            { prodi: "Manajer Riset Pelayanan SCCR", nama: "Fikriya Novita Sari, M.Si" },
             { prodi: "SCCR", nama: "dr. Jutadi, MBBS" }
         ];
 
@@ -793,6 +814,18 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 option.value = index;
                 option.text = `${p.jabatan} - ${p.nama}`;
                 select.appendChild(option);
+            });
+        }
+
+        function initKaprodi() {
+            const selectKaprodi = document.getElementById("in-kaprodi");
+            if (!selectKaprodi) return;
+            selectKaprodi.innerHTML = '';
+            databaseKaprodi.forEach(k => {
+                let option = document.createElement("option");
+                option.value = k.nama;
+                option.text = `${k.nama} (${k.prodi})`;
+                selectKaprodi.appendChild(option);
             });
         }
 
@@ -1004,6 +1037,27 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             updatePreview();
         }
 
+        function tambahKaprodi() {
+            const nama = document.getElementById("in-kaprodi").value;
+            if (!nama) return;
+            const kaprodi = databaseKaprodi.find(d => d.nama === nama);
+            if (kaprodi && !daftarUndangan.some(d => d.nama === nama)) {
+                daftarUndangan.push(kaprodi);
+                renderDaftar();
+                updatePreview();
+            }
+        }
+
+        function tambahSemuaKaprodi() {
+            databaseKaprodi.forEach(d => {
+                if (!daftarUndangan.some(terpilih => terpilih.nama === d.nama)) {
+                    daftarUndangan.push(d);
+                }
+            });
+            renderDaftar();
+            updatePreview();
+        }
+
         function tambahTendik() {
             const nama = document.getElementById("in-tendik").value;
             if (!nama) return;
@@ -1109,7 +1163,8 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             daftarUndangan.forEach((d, index) => {
                 const isUB = databaseUnitBisnis.some(ub => ub.nama === d.nama);
                 const isMhs = d.prodi.includes("Mahasiswa");
-                const isTendik = !d.prodi.includes("Dosen") && !d.prodi.includes("Rektor") && !isMhs && !isUB;
+                const isKaprodi = d.prodi.includes("Kaprodi");
+                const isTendik = !d.prodi.includes("Dosen") && !d.prodi.includes("Rektor") && !isMhs && !isUB && !isKaprodi;
 
                 let prodiLabel = "";
                 let bgColor = "";
@@ -1125,6 +1180,9 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                     prodiLabel = prodiLabel.replace('Mahasiswa D3 ', 'Mhs D3 ');
                     prodiLabel = prodiLabel.replace('Mahasiswa Profesi ', 'Mhs Profesi ');
                     bgColor = "bg-green-100 border-green-300 text-green-800";
+                } else if (isKaprodi) {
+                    prodiLabel = d.prodi.replace('Kaprodi S1 ', 'Kaprodi ');
+                    bgColor = "bg-teal-100 border-teal-300 text-teal-800";
                 } else {
                     prodiLabel = d.prodi.replace('Dosen S1 ', '');
                     bgColor = "bg-blue-100 border-blue-300 text-blue-800";
@@ -1272,6 +1330,7 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
 
         window.onload = function () {
             initPejabatDropdown();
+            initKaprodi();
             initTendik();
             initUnitBisnis();
 
