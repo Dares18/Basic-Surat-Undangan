@@ -451,9 +451,13 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
 
         <button id="btn-toggle-preview" onclick="toggleMobilePreview()"
             class="md:hidden mt-3 w-full bg-white border-2 border-indigo-600 text-indigo-700 hover:bg-indigo-50 font-bold py-3 px-4 rounded-xl transition-all duration-300 flex justify-center items-center gap-2 shadow-sm">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                </path>
             </svg>
             <span id="text-toggle-preview">Lihat Pratinjau Dokumen</span>
         </button>
@@ -746,7 +750,6 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
         // Database Dosen
         const databaseDosen = [
             // Dosen S1 Biomedis
-            { prodi: "Dosen S1 Biomedis", nama: "Mohammad Ariq Nazar, S.Si, M.Biomed" },
             { prodi: "Dosen S1 Biomedis", nama: "Dian Respati Ayu, S.Si., M.Biomed" },
             { prodi: "Dosen S1 Biomedis", nama: "Risky Chandra Satria Irawan S.Si, M.Biomed" },
             { prodi: "Dosen S1 Biomedis", nama: "Naufal Sebastian Anggoro, S.Si.,M.Si" },
@@ -756,7 +759,6 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             { prodi: "Dosen S1 Bioteknologi", nama: "Iffan Alif, S.Si, M.Biotech" },
             { prodi: "Dosen S1 Bioteknologi", nama: "Nurul Hidayah S.Si, M.Biotech" },
             { prodi: "Dosen S1 Bioteknologi", nama: "Salindri Prawitasari, S.Si, M.Si." },
-            { prodi: "Dosen S1 Bioteknologi", nama: "Waheni Rizky Aprilia, Ph.D." },
             { prodi: "Dosen S1 Bioteknologi", nama: "Ahmed Faheem Khan, Ph.D." },
             // Dosen S1 Kebidanan
             { prodi: "Dosen S1 Kebidanan", nama: "Bd. Mariza Mustika D, S.Tr.Keb., M.Tr.Keb" },
@@ -1083,7 +1085,7 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 }
             }
         `;
-            
+
             // Adjust the scaling for mobile view after layout changes
             adjustMobilePreviewScale();
         }
@@ -1094,18 +1096,18 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 let mmWidth = 210;
                 if (size === "F4" || size === "Letter") mmWidth = 215.9;
                 const pxWidth = mmWidth * 3.7795275591;
-                
+
                 const wrapper = document.getElementById("preview-panel");
                 const printWrapper = document.getElementById("print-wrapper");
                 if (!wrapper || !printWrapper || wrapper.classList.contains("hidden")) return;
-                
+
                 const targetWidth = wrapper.offsetWidth - 32;
-                
+
                 if (targetWidth > 0 && targetWidth < pxWidth) {
                     const scale = targetWidth / pxWidth;
                     printWrapper.style.transform = `scale(${scale})`;
                     printWrapper.style.transformOrigin = "top center";
-                    
+
                     const containers = document.querySelectorAll(".page-container");
                     let totalHeight = 0;
                     containers.forEach(c => totalHeight += c.offsetHeight + 20);
@@ -1611,10 +1613,10 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 panel.classList.remove("hidden");
                 panel.classList.add("flex");
                 text.innerText = "Sembunyikan Pratinjau";
-                
+
                 // Panggil adjust segera agar langsung mengecil
                 adjustMobilePreviewScale();
-                
+
                 setTimeout(() => {
                     panel.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
@@ -1631,7 +1633,7 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(adjustMobilePreviewScale, 100);
             });
-            
+
             initPejabatDropdown();
             initKaprodi();
             initTendik();
