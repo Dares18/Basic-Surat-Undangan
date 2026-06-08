@@ -1611,6 +1611,10 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 panel.classList.remove("hidden");
                 panel.classList.add("flex");
                 text.innerText = "Sembunyikan Pratinjau";
+                
+                // Panggil adjust segera agar langsung mengecil
+                adjustMobilePreviewScale();
+                
                 setTimeout(() => {
                     panel.scrollIntoView({ behavior: 'smooth' });
                 }, 100);
@@ -1622,7 +1626,11 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
         }
 
         window.onload = function () {
-            window.addEventListener('resize', adjustMobilePreviewScale);
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(adjustMobilePreviewScale, 100);
+            });
             
             initPejabatDropdown();
             initKaprodi();
