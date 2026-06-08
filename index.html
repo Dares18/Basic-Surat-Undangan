@@ -252,9 +252,9 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
 
                 <div class="mb-4 border-b border-indigo-200/60 pb-4">
                     <label class="block font-semibold text-indigo-700 text-xs mb-1.5">Tambah Dosen</label>
-                    <div class="flex gap-2 mb-2">
+                    <div class="flex flex-col sm:flex-row gap-2 mb-2">
                         <select id="in-prodi"
-                            class="w-1/2 border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm"
+                            class="w-full sm:w-1/2 border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm"
                             onchange="filterDosen()">
                             <option value="Semua">Semua Prodi</option>
                             <option value="S1 Biomedis">S1 Biomedis</option>
@@ -269,66 +269,80 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                             <option value="Wakil Rektor">Wakil Rektor</option>
                         </select>
                         <button onclick="tambahSemuaDosen()"
-                            class="w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95">Tambah
+                            class="w-full sm:w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95 py-2 sm:py-0">Tambah
                             Semua Dosen</button>
                     </div>
 
                     <div class="flex gap-2">
-                        <select id="in-dosen"
-                            class="flex-grow border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
-                        </select>
+                        <div class="flex-grow min-w-0">
+                            <select id="in-dosen"
+                                class="w-full border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
+                            </select>
+                        </div>
                         <button onclick="tambahDosen()"
-                            class="bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
+                            class="shrink-0 bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
                     </div>
                 </div>
 
                 <div class="mb-4 border-b border-indigo-200/60 pb-4">
                     <label class="block font-semibold text-indigo-700 text-xs mb-1.5">Tambah Kaprodi</label>
-                    <div class="flex gap-2 mb-2">
-                        <select id="in-kaprodi"
-                            class="flex-grow border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
-                        </select>
-                        <button onclick="tambahKaprodi()"
-                            class="bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
+                    <div class="flex flex-col sm:flex-row gap-2 mb-2">
+                        <div class="flex gap-2 flex-grow min-w-0">
+                            <div class="flex-grow min-w-0">
+                                <select id="in-kaprodi"
+                                    class="w-full border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
+                                </select>
+                            </div>
+                            <button onclick="tambahKaprodi()"
+                                class="shrink-0 bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
+                        </div>
                         <button onclick="tambahSemuaKaprodi()"
-                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95">Tambah
+                            class="w-full sm:w-auto shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 sm:py-0 rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95">Tambah
                             Semua</button>
                     </div>
                 </div>
 
                 <div class="mb-4 border-b border-indigo-200/60 pb-4">
                     <label class="block font-semibold text-indigo-700 text-xs mb-1.5">Tambah Tendik</label>
-                    <div class="flex gap-2 mb-2">
-                        <select id="in-tendik"
-                            class="flex-grow border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
-                        </select>
-                        <button onclick="tambahTendik()"
-                            class="bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
+                    <div class="flex flex-col sm:flex-row gap-2 mb-2">
+                        <div class="flex gap-2 flex-grow min-w-0">
+                            <div class="flex-grow min-w-0">
+                                <select id="in-tendik"
+                                    class="w-full border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
+                                </select>
+                            </div>
+                            <button onclick="tambahTendik()"
+                                class="shrink-0 bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
+                        </div>
                         <button onclick="tambahSemuaTendik()"
-                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95">Tambah
+                            class="w-full sm:w-auto shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 sm:py-0 rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95">Tambah
                             Semua</button>
                     </div>
                 </div>
 
                 <div class="mb-4 border-b border-indigo-200/60 pb-4">
                     <label class="block font-semibold text-indigo-700 text-xs mb-1.5">Tambah Unit Bisnis</label>
-                    <div class="flex gap-2 mb-2">
-                        <select id="in-unit-bisnis"
-                            class="flex-grow border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
-                        </select>
-                        <button onclick="tambahUnitBisnis()"
-                            class="bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
+                    <div class="flex flex-col sm:flex-row gap-2 mb-2">
+                        <div class="flex gap-2 flex-grow min-w-0">
+                            <div class="flex-grow min-w-0">
+                                <select id="in-unit-bisnis"
+                                    class="w-full border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
+                                </select>
+                            </div>
+                            <button onclick="tambahUnitBisnis()"
+                                class="shrink-0 bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
+                        </div>
                         <button onclick="tambahSemuaUnitBisnis()"
-                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95">Tambah
+                            class="w-full sm:w-auto shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 sm:py-0 rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95">Tambah
                             Semua</button>
                     </div>
                 </div>
 
                 <div class="mb-4">
                     <label class="block font-semibold text-indigo-700 text-xs mb-1.5">Tambah Mahasiswa</label>
-                    <div class="flex gap-2 mb-2">
+                    <div class="flex flex-col sm:flex-row gap-2 mb-2">
                         <select id="in-prodi-mhs"
-                            class="w-1/2 border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm"
+                            class="w-full sm:w-1/2 border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm"
                             onchange="filterMahasiswa()">
                             <option value="Semua">Semua Prodi</option>
                             <option value="S1 Biomedis">S1 Biomedis</option>
@@ -340,16 +354,18 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                             <option value="S1 Ilmu Komunikasi">S1 Ilmu Komunikasi</option>
                         </select>
                         <button onclick="tambahSemuaMahasiswa()"
-                            class="w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95">Tambah
+                            class="w-full sm:w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm hover:shadow active:scale-95 py-2 sm:py-0">Tambah
                             Semua Mhs</button>
                     </div>
 
                     <div class="flex gap-2">
-                        <select id="in-mahasiswa"
-                            class="flex-grow border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
-                        </select>
+                        <div class="flex-grow min-w-0">
+                            <select id="in-mahasiswa"
+                                class="w-full border border-indigo-200 rounded-xl p-2 focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 text-xs transition-all bg-white shadow-sm">
+                            </select>
+                        </div>
                         <button onclick="tambahMahasiswa()"
-                            class="bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
+                            class="shrink-0 bg-emerald-500 hover:bg-emerald-600 text-white px-3.5 rounded-xl font-bold text-lg transition-all shadow-sm hover:shadow active:scale-95 flex items-center justify-center">+</button>
                     </div>
                 </div>
 
@@ -1067,6 +1083,42 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 }
             }
         `;
+            
+            // Adjust the scaling for mobile view after layout changes
+            adjustMobilePreviewScale();
+        }
+
+        function adjustMobilePreviewScale() {
+            if (window.innerWidth < 768) {
+                const size = document.getElementById("in-paper-size").value;
+                let mmWidth = 210;
+                if (size === "F4" || size === "Letter") mmWidth = 215.9;
+                const pxWidth = mmWidth * 3.7795275591;
+                
+                const wrapper = document.getElementById("preview-panel");
+                const printWrapper = document.getElementById("print-wrapper");
+                if (!wrapper || !printWrapper || wrapper.classList.contains("hidden")) return;
+                
+                const targetWidth = wrapper.offsetWidth - 32;
+                
+                if (targetWidth > 0 && targetWidth < pxWidth) {
+                    const scale = targetWidth / pxWidth;
+                    printWrapper.style.transform = `scale(${scale})`;
+                    printWrapper.style.transformOrigin = "top center";
+                    
+                    const containers = document.querySelectorAll(".page-container");
+                    let totalHeight = 0;
+                    containers.forEach(c => totalHeight += c.offsetHeight + 20);
+                    const heightDiff = totalHeight * (1 - scale);
+                    printWrapper.style.marginBottom = `-${heightDiff}px`;
+                }
+            } else {
+                const printWrapper = document.getElementById("print-wrapper");
+                if (printWrapper) {
+                    printWrapper.style.transform = "none";
+                    printWrapper.style.marginBottom = "0";
+                }
+            }
         }
 
         function loadKopSurat(event) {
@@ -1570,6 +1622,8 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
         }
 
         window.onload = function () {
+            window.addEventListener('resize', adjustMobilePreviewScale);
+            
             initPejabatDropdown();
             initKaprodi();
             initTendik();
