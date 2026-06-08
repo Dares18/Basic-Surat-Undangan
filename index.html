@@ -433,13 +433,22 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
             Cetak / Simpan PDF
         </button>
 
+        <button id="btn-toggle-preview" onclick="toggleMobilePreview()"
+            class="md:hidden mt-3 w-full bg-white border-2 border-indigo-600 text-indigo-700 hover:bg-indigo-50 font-bold py-3 px-4 rounded-xl transition-all duration-300 flex justify-center items-center gap-2 shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+            <span id="text-toggle-preview">Lihat Pratinjau Dokumen</span>
+        </button>
+
         <div class="mt-6 text-center text-xs text-gray-400 font-medium">
             Made with love from Daffa ❤️
         </div>
     </div>
 
-    <div
-        class="w-full md:w-2/3 bg-slate-200/50 p-4 md:p-12 overflow-x-auto md:overflow-y-auto md:h-full flex flex-col items-center transition-colors duration-500">
+    <div id="preview-panel"
+        class="hidden md:flex w-full md:w-2/3 bg-slate-200/50 p-4 md:p-12 overflow-x-auto md:overflow-y-auto md:h-full flex-col items-center transition-colors duration-500">
         <div id="print-wrapper" class="w-full flex flex-col items-center">
 
             <div class="page-container relative w-full flex flex-col">
@@ -1540,6 +1549,23 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                     </tr>
                 `;
                 }
+            }
+        }
+
+        function toggleMobilePreview() {
+            const panel = document.getElementById("preview-panel");
+            const text = document.getElementById("text-toggle-preview");
+            if (panel.classList.contains("hidden")) {
+                panel.classList.remove("hidden");
+                panel.classList.add("flex");
+                text.innerText = "Sembunyikan Pratinjau";
+                setTimeout(() => {
+                    panel.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            } else {
+                panel.classList.add("hidden");
+                panel.classList.remove("flex");
+                text.innerText = "Lihat Pratinjau Dokumen";
             }
         }
 
