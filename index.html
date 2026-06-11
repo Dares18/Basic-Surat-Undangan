@@ -2009,7 +2009,7 @@ Tugas Anda: Berdasarkan DATA SAAT INI di atas, ubah isinya sesuai dengan INSTRUK
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Gagal menghubungi AI (Kode: ${response.status}). Pastikan API Key valid.`);
+                    throw new Error(`Gagal menghubungi AI (Kode: ${response.status}). Load server sedang tinggi, silakan coba lagi.`);
                 }
 
                 const data = await response.json();
