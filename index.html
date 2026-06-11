@@ -161,6 +161,7 @@
                     onchange="pilihKopSurat()">
                     <option value="">-- Kosongkan Kop Surat --</option>
                     <option value="Assets/Kop Surat/KOP IKMB.jpeg">KOP Surat IKMB</option>
+                    <option value="Assets/Kop Surat/KOP APU.png">KOP Surat APU</option>
                 </select>
                 <div class="relative flex items-center py-2">
                     <div class="flex-grow border-t border-indigo-200/60"></div>
@@ -1954,6 +1955,7 @@ Format JSON:
   "hari_tanggal": "string dengan format YYYY-MM-DD (contoh: 2026-06-09) atau kosongkan",
   "waktu": "string rentang waktu (contoh: 09.00 WIB - Selesai) atau kosongkan",
   "tempat": "string nama tempat/ruangan atau kosongkan",
+  "kop_surat": "string path kop surat ('Assets/Kop Surat/KOP IKMB.jpeg' atau 'Assets/Kop Surat/KOP APU.png' atau kosongkan)",
   "peserta_lampiran": ["Nama Orang 1", "Kaprodi Ilmu Komunikasi", "Wakil Rektor I"] // array of string berisi nama lengkap ATAU nama jabatan yang ingin diundang. Kosongkan jika tidak ada.
 }`;
 
@@ -1988,6 +1990,7 @@ Format JSON:
 - Hari/Tanggal Rapat: ${currentTglRapat || '-'}
 - Waktu Rapat: ${currentWaktu || '-'}
 - Tempat Rapat: ${currentTempat || '-'}
+- Kop Surat Saat Ini: ${document.getElementById("in-kop-dropdown").value || 'Kosong'}
 - Daftar Undangan (Peserta): ${currentPeserta || 'Belum ada'}
 
 INSTRUKSI PENGGUNA: ${promptInput}
@@ -2039,6 +2042,14 @@ Tugas Anda: Berdasarkan DATA SAAT INI di atas, ubah isinya sesuai dengan INSTRUK
                 if (result.hari_tanggal) document.getElementById("in-tgl-rapat").value = result.hari_tanggal;
                 if (result.waktu) document.getElementById("in-waktu").value = result.waktu;
                 if (result.tempat) document.getElementById("in-tempat").value = result.tempat;
+                if (result.kop_surat !== undefined) {
+                    const dropdown = document.getElementById("in-kop-dropdown");
+                    if (dropdown) {
+                        dropdown.value = result.kop_surat;
+                        updateCustomDropdown("in-kop-dropdown");
+                        pilihKopSurat();
+                    }
+                }
 
                 if (result.penandatangan && typeof databasePejabat !== 'undefined') {
                     const selectPejabat = document.getElementById("in-penandatangan");
