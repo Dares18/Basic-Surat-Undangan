@@ -1158,47 +1158,56 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
 
         function updatePrintSettings() {
             const size = document.getElementById("in-paper-size").value;
-            const marginStr = document.getElementById("in-margin").value + "cm";
+            const marginVal = parseFloat(document.getElementById("in-margin").value);
+            const marginStr = marginVal + "cm";
+            const marginPx = (marginVal * 37.795275591) + "px";
 
-            let width, height, printSizeRule;
+            let width, height, printSizeRule, mmWidth, mmHeight;
             if (size === "A4") {
                 width = "210mm"; height = "297mm"; printSizeRule = "A4";
+                mmWidth = 210; mmHeight = 297;
             } else if (size === "F4") {
                 width = "215.9mm"; height = "330.2mm"; printSizeRule = "8.5in 13in";
+                mmWidth = 215.9; mmHeight = 330.2;
             } else if (size === "Letter") {
                 width = "215.9mm"; height = "279.4mm"; printSizeRule = "letter";
+                mmWidth = 215.9; mmHeight = 279.4;
             }
 
-            // Terapkan Margin Kiri dan Kanan pada Container
+            const pxWidth = (mmWidth * 3.7795275591) + "px";
+            const pxHeight = (mmHeight * 3.7795275591) + "px";
+
+            // Terapkan Margin dan Ukuran dalam px untuk rendering layar agar bisa di-zoom/scale dengan sempurna di dalam iframe
             const containers = document.querySelectorAll(".page-container");
             containers.forEach(c => {
-                c.style.width = width;
-                c.style.minHeight = height;
-                c.style.paddingLeft = marginStr;
-                c.style.paddingRight = marginStr;
+                c.style.width = pxWidth;
+                c.style.minHeight = pxHeight;
+                c.style.paddingLeft = marginPx;
+                c.style.paddingRight = marginPx;
             });
 
             // Fitur resize otomatis Kop Surat (lebih lebar dari teks, sisa margin 1cm dari tepi)
-            const marginVal = parseFloat(document.getElementById("in-margin").value);
             const kopMargin = 1.0; // Margin statis kop surat 1cm dari tepi kertas
             const negativeMargin = marginVal > kopMargin ? (marginVal - kopMargin) : 0;
+            const negativeMarginPx = negativeMargin * 37.795275591;
+            const kopMarginPx = kopMargin * 37.795275591;
 
             document.querySelectorAll(".kop-header").forEach(k => {
-                k.style.marginLeft = `-${negativeMargin}cm`;
-                k.style.marginRight = `-${negativeMargin}cm`;
-                k.style.marginTop = `${kopMargin}cm`;
-                k.style.marginBottom = `0.5cm`;
+                k.style.marginLeft = `-${negativeMarginPx}px`;
+                k.style.marginRight = `-${negativeMarginPx}px`;
+                k.style.marginTop = `${kopMarginPx}px`;
+                k.style.marginBottom = `18.9px`; // 0.5cm
             });
 
             // Terapkan Margin Atas dan Bawah pada Spacer Tabel
             const isKopActive = document.getElementById("out-kop-container") && !document.getElementById("out-kop-container").classList.contains("hidden");
-            const topMarginStr = isKopActive ? "0cm" : marginStr;
-            document.querySelectorAll(".spacer-top").forEach(s => s.style.height = topMarginStr);
-            document.querySelectorAll(".spacer-bottom").forEach(s => s.style.height = marginStr);
+            const topMarginPxStr = isKopActive ? "0px" : marginPx;
+            document.querySelectorAll(".spacer-top").forEach(s => s.style.height = topMarginPxStr);
+            document.querySelectorAll(".spacer-bottom").forEach(s => s.style.height = marginPx);
 
             const styleEl = document.getElementById("dynamic-print-style");
             // Karena sistem Margin Custom dari Code yang bekerja,
-            // paksa margin cetak asli ke 0 !important
+            // paksa margin cetak asli ke 0 !important dan gunakan satuan fisik (mm/cm) saat print
             styleEl.innerHTML = `
             @media print {
                 @page { 
@@ -1222,6 +1231,10 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                     border: none !important;
                     zoom: 1 !important;
                     transform: none !important;
+                    width: ${width} !important;
+                    min-height: ${height} !important;
+                    padding-left: ${marginStr} !important;
+                    padding-right: ${marginStr} !important;
                 }
             }
         `;
@@ -1238,7 +1251,7 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
 
             const wrapper = document.getElementById("preview-panel");
             const printWrapper = document.getElementById("print-wrapper");
-            if (!wrapper || !printWrapper || wrapper.classList.contains("hidden")) return;
+            if (!wrapper || !printWrapper || wrapper.offsetWidth === 0 || wrapper.offsetHeight === 0) return;
 
             const computedStyle = window.getComputedStyle(wrapper);
             const paddingHorizontal = parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
@@ -1860,6 +1873,13 @@ Demikian undangan ini kami sampaikan. Atas perhatian dan kehadiran Bapak/Ibu, ka
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(adjustMobilePreviewScale, 100);
             });
+
+            const previewPanelEl = document.getElementById("preview-panel");
+            if (previewPanelEl && window.ResizeObserver) {
+                new ResizeObserver(() => {
+                    adjustMobilePreviewScale();
+                }).observe(previewPanelEl);
+            }
 
             initPejabatDropdown();
             initPimpinan();
